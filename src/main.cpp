@@ -19,9 +19,11 @@ using namespace vex;
 
 //REMOVE THE //  ON THE LINE WITH YOUR TYPE  OF DRIVE (e.g. if you have an xDrive remove the // on line 24)
 
-#define linearDrive
-#define mechDrive
-#define xDrive
+// note from todd: you need to uncomment only one type of drive, otherwise bad things happen
+
+//#define linearDrive
+//#define mechDrive
+//#define xDrive
 
 
 
