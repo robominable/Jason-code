@@ -60,6 +60,8 @@ vex::competition Competition;
 void pre_auton( void ) {
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
+  //上抬手臂
+  //放下手臂
   
 }
 
@@ -187,9 +189,13 @@ void usercontrol( void ) {
       Larm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
       Rarm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
     }
-    if(Controller.ButtonL2.pressing()){
+    else if(Controller.ButtonL2.pressing()){
       Larm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
       Rarm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
+    }
+    else{
+      Larm.stop();
+      Rarm.stop();
     }
 
     int bridgeSpeed = 60;
@@ -197,12 +203,20 @@ void usercontrol( void ) {
       Lbridge.spin(vex::directionType::fwd,bridgeSpeed,vex::velocityUnits::pct);
       Rbridge.spin(vex::directionType::fwd,bridgeSpeed,vex::velocityUnits::pct);
     }
-    if(Controller.ButtonL1.pressing()){
+    else if(Controller.ButtonL1.pressing()){
       Lbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
       Rbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
     }
+    else{
+      Lbridge.stop();
+      Rbridge.stop();
+    }
+
     int clawSpeed = 50;
-    if
+    if(Controller.ButtonA.pressing()){
+      Lclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
+      Rclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
+    }
  
     vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
   }
