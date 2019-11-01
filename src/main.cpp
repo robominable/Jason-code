@@ -217,6 +217,10 @@ void usercontrol( void ) {
       Lclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
       Rclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
     }
+    else{
+      Lcalw.stop();
+      Rclaw.stop();
+    }
  
     vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
   }
