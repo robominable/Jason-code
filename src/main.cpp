@@ -22,7 +22,7 @@ using namespace vex;
 // note from todd: you need to uncomment only one type of drive, otherwise bad things happen
 
 //#define linearDrive
-//#define mechDrive
+#define mechDrive
 //#define xDrive
 
 
@@ -109,7 +109,7 @@ void usercontrol( void ) {
             Ldrive.stop();
             Rdirve.stop();
           }
-/*if (Controller.Axis2.position(vex::percentUnits::pct) > creep || Controller.Axis2.position(vex::percentUnits::pct) < -creep || Controller.Axis1.position(vex::percentUnits::pct) > creep || Controller.Axis1.position(vex::percentUnits::pct) < -creep){
+        /*if (Controller.Axis2.position(vex::percentUnits::pct) > creep || Controller.Axis2.position(vex::percentUnits::pct) < -creep || Controller.Axis1.position(vex::percentUnits::pct) > creep || Controller.Axis1.position(vex::percentUnits::pct) < -creep){
             BLdrive.spin(vex::directionType::fwd,(Controller.Axis2.position(vex::percentUnits::pct) - Controller.Axis1.position(vex::percentUnits::pct)),vex::velocityUnits::pct);
         }
           else{
@@ -129,7 +129,7 @@ void usercontrol( void ) {
           }*/
       #endif
 
-      /*XDRIVE
+      XDRIVE
       #ifdef xDrive
       int creep;
         creep = float(0.05);
@@ -175,13 +175,34 @@ void usercontrol( void ) {
             else{
                 Rdrive.stop();
               }
-      #endif*/
+      #endif
       
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to 
     // update your motors, etc.
     // ........................................................................
+    
+    int armSpeed = 75;
+    if(Controller.ButtonR2.pressing()){
+      Larm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
+      Rarm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
+    }
+    if(Controller.ButtonL2.pressing()){
+      Larm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
+      Rarm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
+    }
 
+    int bridgeSpeed = 60;
+    if(Controller.ButtonR1.pressing()){
+      Lbridge.spin(vex::directionType::fwd,bridgeSpeed,vex::velocityUnits::pct);
+      Rbridge.spin(vex::directionType::fwd,bridgeSpeed,vex::velocityUnits::pct);
+    }
+    if(Controller.ButtonL1.pressing()){
+      Lbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
+      Rbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
+    }
+    int clawSpeed = 50;
+    if
  
     vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
   }
