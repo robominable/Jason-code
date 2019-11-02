@@ -105,11 +105,11 @@ void usercontrol( void ) {
         creep = float(0.05);
         if (Controller.Axis3.position(vex::percentUnits::pct) > creep || Controller.Axis3.position(vex::percentUnits::pct) < -creep || Controller.Axis1.position(vex::percentUnits::pct) > creep || Controller.Axis1.position(vex::percentUnits::pct) < -creep){
             Ldrive.spin(vex::directionType::fwd,(Controller.Axis3.position(vex::percentUnits::pct) + Controller.Axis1.position(vex::percentUnits::pct)),vex::velocityUnits::pct);
-            Rdrive.spin(vex::directionType::fwd,(Controller.Axis3.position(vex::percentUnits::pct) - Controller.Axis1.position(vex::percentUnits::pct)),vex::velocityUnits::pct);
+            Rdrive.spin(vex::directionType::rev,(Controller.Axis3.position(vex::percentUnits::pct) - Controller.Axis1.position(vex::percentUnits::pct)),vex::velocityUnits::pct);
         }
           else{
             Ldrive.stop();
-            Rdirve.stop();
+            Rdrive.stop();
           }
         /*if (Controller.Axis2.position(vex::percentUnits::pct) > creep || Controller.Axis2.position(vex::percentUnits::pct) < -creep || Controller.Axis1.position(vex::percentUnits::pct) > creep || Controller.Axis1.position(vex::percentUnits::pct) < -creep){
             BLdrive.spin(vex::directionType::fwd,(Controller.Axis2.position(vex::percentUnits::pct) - Controller.Axis1.position(vex::percentUnits::pct)),vex::velocityUnits::pct);
@@ -131,7 +131,7 @@ void usercontrol( void ) {
           }*/
       #endif
 
-      XDRIVE
+      //XDRIVE
       #ifdef xDrive
       int creep;
         creep = float(0.05);
@@ -172,7 +172,7 @@ void usercontrol( void ) {
                 Ldrive.stop();
             }
         if (Controller.Axis2.position(vex::percentUnits::pct) > creep || Controller.Axis2.position(vex::percentUnits::pct) < -creep){
-            Rdrive.spin(vex::directionType::fwd,(Controller.Axis2.position(vex::percentUnits::pct)),vex::velocityUnits::pct);
+            Rdrive.spin(vex::directionType::rev,(Controller.Axis2.position(vex::percentUnits::pct)),vex::velocityUnits::pct);
         }
             else{
                 Rdrive.stop();
@@ -186,11 +186,11 @@ void usercontrol( void ) {
     
     int armSpeed = 75;
     if(Controller.ButtonR2.pressing()){
-      Larm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
+      Larm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
       Rarm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
     }
     else if(Controller.ButtonL2.pressing()){
-      Larm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
+      Larm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
       Rarm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
     }
     else{
@@ -200,11 +200,11 @@ void usercontrol( void ) {
 
     int bridgeSpeed = 60;
     if(Controller.ButtonR1.pressing()){
-      Lbridge.spin(vex::directionType::fwd,bridgeSpeed,vex::velocityUnits::pct);
+      Lbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
       Rbridge.spin(vex::directionType::fwd,bridgeSpeed,vex::velocityUnits::pct);
     }
     else if(Controller.ButtonL1.pressing()){
-      Lbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
+      Lbridge.spin(vex::directionType::fwd,bridgeSpeed,vex::velocityUnits::pct);
       Rbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
     }
     else{
@@ -215,10 +215,10 @@ void usercontrol( void ) {
     int clawSpeed = 50;
     if(Controller.ButtonA.pressing()){
       Lclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
-      Rclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
+      Rclaw.spin(vex::directionType::rev,clawSpeed,vex::velocityUnits::pct);
     }
     else{
-      Lcalw.stop();
+      Lclaw.stop();
       Rclaw.stop();
     }
  
