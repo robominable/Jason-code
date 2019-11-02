@@ -30,14 +30,14 @@ using namespace vex;
 // A global instance of vex::brain used for printing to the V5 brain screen
 vex::brain       Brain;
 vex::controller Controller = vex::controller(vex::controllerType::primary);
-vex::motor Ldrive = vex::motor(PORT1,vex::gearSetting::ratio18_1,false); 
-vex::motor Rdrive = vex::motor(PORT2,vex::gearSetting::ratio18_1,false);
+vex::motor Ldrive = vex::motor(PORT2,vex::gearSetting::ratio18_1,false); 
+vex::motor Rdrive = vex::motor(PORT1,vex::gearSetting::ratio18_1,false);
 vex::motor Larm = vex::motor(PORT3,vex::gearSetting::ratio18_1,false);
 vex::motor Rarm = vex::motor(PORT4,vex::gearSetting::ratio18_1,false);
-vex::motor Lclaw = vex::motor(PORT5,vex::gearSetting::ratio18_1,false);
-vex::motor Rclaw = vex::motor(PORT6,vex::gearSetting::ratio18_1,false);
-vex::motor Lbridge = vex::motor(PORT7,vex::gearSetting::ratio18_1,false);
-vex::motor Rbridge = vex::motor(PORT8,vex::gearSetting::ratio18_1,false);
+vex::motor Lclaw = vex::motor(PORT7,vex::gearSetting::ratio18_1,false);
+vex::motor Rclaw = vex::motor(PORT8,vex::gearSetting::ratio18_1,false);
+vex::motor Lbridge = vex::motor(PORT5,vex::gearSetting::ratio18_1,false);
+vex::motor Rbridge = vex::motor(PORT7,vex::gearSetting::ratio18_1,false);
 
 
 
