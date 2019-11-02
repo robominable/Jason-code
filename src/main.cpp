@@ -21,8 +21,8 @@ using namespace vex;
 
 // note from todd: you need to uncomment only one type of drive, otherwise bad things happen
 
-//#define linearDrive
-#define mechDrive
+#define linearDrive
+//#define mechDrive
 //#define xDrive
 
 
@@ -37,10 +37,11 @@ vex::motor Rarm = vex::motor(PORT4,vex::gearSetting::ratio18_1,false);
 vex::motor Lclaw = vex::motor(PORT7,vex::gearSetting::ratio18_1,false);
 vex::motor Rclaw = vex::motor(PORT8,vex::gearSetting::ratio18_1,false);
 vex::motor Lbridge = vex::motor(PORT5,vex::gearSetting::ratio18_1,false);
-vex::motor Rbridge = vex::motor(PORT7,vex::gearSetting::ratio18_1,false);
+vex::motor Rbridge = vex::motor(PORT6,vex::gearSetting::ratio18_1,false);
 
-
-
+int clawSpeed = 30;
+int armSpeed = 30;
+int bridgeSpeed = 30;
 // A global instance of vex::competition
 vex::competition Competition;
 
@@ -184,7 +185,6 @@ void usercontrol( void ) {
     // update your motors, etc.
     // ........................................................................
     
-    int armSpeed = 75;
     if(Controller.ButtonR2.pressing()){
       Larm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
       Rarm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
@@ -198,7 +198,6 @@ void usercontrol( void ) {
       Rarm.stop();
     }
 
-    int bridgeSpeed = 60;
     if(Controller.ButtonR1.pressing()){
       Lbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
       Rbridge.spin(vex::directionType::fwd,bridgeSpeed,vex::velocityUnits::pct);
@@ -212,7 +211,6 @@ void usercontrol( void ) {
       Rbridge.stop();
     }
 
-    int clawSpeed = 50;
     if(Controller.ButtonA.pressing()){
       Lclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
       Rclaw.spin(vex::directionType::rev,clawSpeed,vex::velocityUnits::pct);
