@@ -40,8 +40,8 @@ vex::motor Lbridge = vex::motor(PORT5,vex::gearSetting::ratio18_1,false);
 vex::motor Rbridge = vex::motor(PORT6,vex::gearSetting::ratio18_1,false);
 
 int clawSpeed = 100;
-int armSpeed = 10;
-int bridgeSpeed = 10;
+int armSpeed = 25;
+int bridgeSpeed = 5;
 // A global instance of vex::competition
 vex::competition Competition;
 
@@ -79,11 +79,11 @@ void pre_auton( void ) {
 void autonomous( void ) {
   // ..........................................................................
   // Insert autonomous user code here.
-  Ldrive.spin(vex::directionType::fwd,50,vex::velocityUnits::pct);
-  Rdrive.spin(vex::directionType::rev,50,vex::velocityUnits::pct);
-  vex::task::sleep(200);
-  Ldrive.stop(vex::brakeType::hold);
-  Rdrive.stop(vex::brakeType::hold);
+  Ldrive.spin(vex::directionType::fwd,100,vex::velocityUnits::pct);
+  Rdrive.spin(vex::directionType::rev,100,vex::velocityUnits::pct);
+  vex::task::sleep(400);
+  Ldrive.stop();
+  Rdrive.stop();
   // ..........................................................................
 
 }
@@ -194,9 +194,14 @@ void usercontrol( void ) {
       Larm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
       Rarm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
     }
+    
+    else if(Controller.ButtonY.pressing()){
+      Larm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
+      Rarm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
+    }
     else{
-      Larm.stop();
-      Rarm.stop();
+      Larm.stop(vex::brakeType::hold);
+      Rarm.stop(vex::brakeType::hold);
     }
 
     if(Controller.ButtonL1.pressing()){
@@ -208,8 +213,8 @@ void usercontrol( void ) {
       Rbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
     }
     else{
-      Lbridge.stop();
-      Rbridge.stop();
+      Lbridge.stop(vex::brakeType::hold);
+      Rbridge.stop(vex::brakeType::hold);
     }
 
     if(Controller.ButtonR1.pressing() || Controller.ButtonR2.pressing()){
@@ -224,8 +229,8 @@ void usercontrol( void ) {
     }
 
     else{
-      Lclaw.stop();
-      Rclaw.stop();
+      Lclaw.stop(vex::brakeType::hold);
+      Rclaw.stop(vex::brakeType::hold);
     }
     
  
