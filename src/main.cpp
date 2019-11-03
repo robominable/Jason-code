@@ -39,9 +39,9 @@ vex::motor Rclaw = vex::motor(PORT8,vex::gearSetting::ratio18_1,false);
 vex::motor Lbridge = vex::motor(PORT5,vex::gearSetting::ratio18_1,false);
 vex::motor Rbridge = vex::motor(PORT6,vex::gearSetting::ratio18_1,false);
 
-int clawSpeed = 30;
-int armSpeed = 30;
-int bridgeSpeed = 30;
+int clawSpeed = 100;
+int armSpeed = 10;
+int bridgeSpeed = 10;
 // A global instance of vex::competition
 vex::competition Competition;
 
@@ -79,6 +79,11 @@ void pre_auton( void ) {
 void autonomous( void ) {
   // ..........................................................................
   // Insert autonomous user code here.
+  Ldrive.spin(vex::directionType::fwd,50,vex::velocityUnits::pct);
+  Rdrive.spin(vex::directionType::rev,50,vex::velocityUnits::pct);
+  vex::task::sleep(200);
+  Ldrive.stop(vex::brakeType::hold);
+  Rdrive.stop(vex::brakeType::hold);
   // ..........................................................................
 
 }
@@ -170,13 +175,13 @@ void usercontrol( void ) {
             Ldrive.spin(vex::directionType::fwd,(Controller.Axis3.position(vex::percentUnits::pct)),vex::velocityUnits::pct);
         }
             else{
-                Ldrive.stop();
+                Ldrive.stop(vex::brakeType::hold);
             }
         if (Controller.Axis2.position(vex::percentUnits::pct) > creep || Controller.Axis2.position(vex::percentUnits::pct) < -creep){
             Rdrive.spin(vex::directionType::rev,(Controller.Axis2.position(vex::percentUnits::pct)),vex::velocityUnits::pct);
         }
             else{
-                Rdrive.stop();
+                Rdrive.stop(vex::brakeType::hold);
               }
       #endif
       
@@ -185,11 +190,7 @@ void usercontrol( void ) {
     // update your motors, etc.
     // ........................................................................
     
-    if(Controller.ButtonR2.pressing()){
-      Larm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
-      Rarm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
-    }
-    else if(Controller.ButtonL2.pressing()){
+    if(Controller.ButtonL2.pressing()){
       Larm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
       Rarm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
     }
@@ -198,11 +199,11 @@ void usercontrol( void ) {
       Rarm.stop();
     }
 
-    if(Controller.ButtonR1.pressing()){
+    if(Controller.ButtonL1.pressing()){
       Lbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
       Rbridge.spin(vex::directionType::fwd,bridgeSpeed,vex::velocityUnits::pct);
     }
-    else if(Controller.ButtonL1.pressing()){
+    else if(Controller.ButtonB.pressing()){
       Lbridge.spin(vex::directionType::fwd,bridgeSpeed,vex::velocityUnits::pct);
       Rbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
     }
@@ -211,14 +212,22 @@ void usercontrol( void ) {
       Rbridge.stop();
     }
 
-    if(Controller.ButtonA.pressing()){
-      Lclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
-      Rclaw.spin(vex::directionType::rev,clawSpeed,vex::velocityUnits::pct);
+    if(Controller.ButtonR1.pressing() || Controller.ButtonR2.pressing()){
+      if(Controller.ButtonR1.pressing()){
+        Lclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
+        Rclaw.spin(vex::directionType::rev,clawSpeed,vex::velocityUnits::pct);
+      }
+      if(Controller.ButtonR2.pressing()){
+        Lclaw.spin(vex::directionType::rev,clawSpeed,vex::velocityUnits::pct);
+        Rclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
+      }
     }
+
     else{
       Lclaw.stop();
       Rclaw.stop();
     }
+    
  
     vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
   }
