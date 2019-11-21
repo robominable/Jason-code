@@ -41,7 +41,7 @@ vex::motor Rbridge = vex::motor(PORT6,vex::gearSetting::ratio18_1,false);
 
 int clawSpeed = 100;
 int armSpeed = 25;
-int bridgeSpeed = 5;
+int bridgeSpeed = 25;
 // A global instance of vex::competition
 vex::competition Competition;
 
