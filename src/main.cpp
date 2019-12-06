@@ -41,7 +41,7 @@ vex::motor Rbridge = vex::motor(PORT6,vex::gearSetting::ratio18_1,false);
 
 int clawSpeed = 100;
 int armSpeed = 25;
-int bridgeSpeed = 25;
+int bridgeSpeed = 35;
 // A global instance of vex::competition
 vex::competition Competition;
 
@@ -79,12 +79,92 @@ void pre_auton( void ) {
 void autonomous( void ) {
   // ..........................................................................
   // Insert autonomous user code here.
+  
+  //Lclaw.spin(vex::directionType::rev,clawSpeed,vex::velocityUnits::pct);
+  //Rclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
+  Lbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
+  Rbridge.spin(vex::directionType::fwd,bridgeSpeed,vex::velocityUnits::pct);
+  vex::task::sleep(400);
+  //Lclaw.stop(vex::brakeType::hold);
+  //Rclaw.stop(vex::brakeType::hold);
+  Lbridge.stop();
+  Rbridge.stop();
+  Lbridge.spin(vex::directionType::rev,bridgeSpeed,vex::velocityUnits::pct);
+  Rbridge.spin(vex::directionType::fwd,bridgeSpeed,vex::velocityUnits::pct);
+
+  vex::task::sleep(400);
+  Lbridge.stop();
+  Rbridge.stop();
   Ldrive.spin(vex::directionType::fwd,100,vex::velocityUnits::pct);
   Rdrive.spin(vex::directionType::rev,100,vex::velocityUnits::pct);
+  vex::task::sleep(350);
+  Ldrive.stop(vex::brakeType::hold);
+  Rdrive.stop(vex::brakeType::hold);
+  vex::task::sleep(200);
+
+  Lclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
+  Rclaw.spin(vex::directionType::rev,clawSpeed,vex::velocityUnits::pct);
+  vex::task::sleep(300);
+  Ldrive.spin(vex::directionType::fwd,17,vex::velocityUnits::pct);
+  Rdrive.spin(vex::directionType::rev,17,vex::velocityUnits::pct);
+  vex::task::sleep(300);
+
+  Ldrive.stop(vex::brakeType::hold);
+  Rdrive.stop(vex::brakeType::hold);
   vex::task::sleep(400);
+  Lclaw.spin(vex::directionType::fwd,clawSpeed,vex::velocityUnits::pct);
+  Rclaw.spin(vex::directionType::rev,clawSpeed,vex::velocityUnits::pct);
+  Ldrive.spin(vex::directionType::fwd,7,vex::velocityUnits::pct);
+  Rdrive.spin(vex::directionType::rev,7,vex::velocityUnits::pct);
+  vex::task::sleep(7000);
+  Ldrive.stop(vex::brakeType::hold);
+  Rdrive.stop(vex::brakeType::hold);
+
+  //vex::task::sleep(600);
+  //Lclaw.stop(vex::brakeType::hold);
+  //Rclaw.stop(vex::brakeType::hold);
+
+  // ..........................................................................
+  
+  Ldrive.spin(vex::directionType::rev,100,vex::velocityUnits::pct);
+  Rdrive.spin(vex::directionType::rev,100,vex::velocityUnits::pct);
+  vex::task::sleep(690);
+  Ldrive.stop(vex::brakeType::hold);
+  Rdrive.stop(vex::brakeType::hold);
+
+  Ldrive.spin(vex::directionType::fwd,100,vex::velocityUnits::pct);
+  Rdrive.spin(vex::directionType::rev,100,vex::velocityUnits::pct);
+  vex::task::sleep(600);
+  Ldrive.stop(vex::brakeType::hold);
+  Rdrive.stop(vex::brakeType::hold);
+
+  Lbridge.spin(vex::directionType::rev,45,vex::velocityUnits::pct);
+  Rbridge.spin(vex::directionType::fwd,45,vex::velocityUnits::pct);
+  Larm.spin(vex::directionType::fwd,25,vex::velocityUnits::pct);
+  Rarm.spin(vex::directionType::rev,25,vex::velocityUnits::pct);
+  Lclaw.spin(vex::directionType::fwd,30,vex::velocityUnits::pct);
+  Rclaw.spin(vex::directionType::rev,30,vex::velocityUnits::pct);
+  Ldrive.spin(vex::directionType::rev,5,vex::velocityUnits::pct);
+  Rdrive.spin(vex::directionType::fwd,5,vex::velocityUnits::pct);
+  vex::task::sleep(1000);
+  Larm.stop(vex::brakeType::hold);
+  Rarm.stop(vex::brakeType::hold);
+  vex::task::sleep(2500);
+  Lbridge.stop(vex::brakeType::hold);
+  Rbridge.stop(vex::brakeType::hold);
+  
+  vex::task::sleep(2000);
+
+  Lclaw.stop();
+  Rclaw.stop();
   Ldrive.stop();
   Rdrive.stop();
-  // ..........................................................................
+  
+  Ldrive.spin(vex::directionType::rev,30,vex::velocityUnits::pct);
+  Rdrive.spin(vex::directionType::fwd,30,vex::velocityUnits::pct);
+  vex::task::sleep(1000);
+  Ldrive.stop();
+  Rdrive.stop();
 
 }
 
@@ -198,6 +278,10 @@ void usercontrol( void ) {
     else if(Controller.ButtonY.pressing()){
       Larm.spin(vex::directionType::rev,armSpeed,vex::velocityUnits::pct);
       Rarm.spin(vex::directionType::fwd,armSpeed,vex::velocityUnits::pct);
+    }
+    else if(Controller.ButtonX.pressing()){
+      Larm.stop();
+      Rarm.stop();
     }
     else{
       Larm.stop(vex::brakeType::hold);
